@@ -3,7 +3,7 @@
 const fs = require('fs');
 const iconv = require('iconv-lite');
 
-class BasicSetting {
+class BasicConfigures {
     constructor(layer, color, lineType, lineWidth) {
         this.layer = layer;
         this.color = color;
@@ -343,7 +343,7 @@ class SFCWriter {
         this.record(keyword, parameters);
     }
     /**
-     * @param {BasicSetting} basic layer, color, lineType, lineWidth setting object
+     * @param {BasicConfigures} basic layer, color, lineType, lineWidth setting object
      * @param {String} font fontName
      * @param {String} string text(max: 256bytes)
      * @param {Object|Array} xy basePoint position
@@ -917,8 +917,8 @@ class SFCWriter {
 
 const sfc = new SFCWriter();
 const group = sfc.sfigObj("part1");
-const basic = new BasicSetting("layer1", "red", "continuous", 0.13);
-const basic2 = new BasicSetting("layer1", "blue", "continuous", 0.13);
+const basic = new BasicConfigures("layer1", "red", "continuous", 0.13);
+const basic2 = new BasicConfigures("layer1", "blue", "continuous", 0.13);
 sfc.setAttributes('a', 'b', 'c', 'd', 1, 'e', 'f', new Date(), 'g', 'h');
 sfc.drawArc(basic, [100,100], 100, 0, 180, 1);
 sfc.drawCircle(basic, [100, 100], 10);
