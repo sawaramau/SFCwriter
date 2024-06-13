@@ -12,7 +12,7 @@ class BasicSetting {
     }
 }
 
-class SFCDrawer {
+class SFCWriter {
     // SXF version.3.1
     // 仕様書
     //     https://www.cals-ed.go.jp/sxf_ver3-1_specification_draft/
@@ -371,7 +371,7 @@ class SFCDrawer {
     /**
      * @param {String} name 
      * @param {Number} flag 1:部分図（数学座標系） 2:部分図（測地座標系） 3:作図グループ 4:作図部品
-     * @returns SFCDrawer Object
+     * @returns SFCWriter Object
      */
     sfigObj(name, flag = 4) {
         //   部分図とは：シートやビューポートに近い概念らしい・・
@@ -381,7 +381,7 @@ class SFCDrawer {
         if(this.#sfigs.find(sfig => sfig.name === name)) {
             throw "複合図形定義" + name + "は既に定義されています。";
         }
-        const sfig = new SFCDrawer({
+        const sfig = new SFCWriter({
             obj: this,
             fd: () => this.#fd,
             layers: this.#layers,
@@ -404,7 +404,7 @@ class SFCDrawer {
     compositeCurveObj(basic, invisibility) {
         // compositeCurveは書いた箇所に配置されるので、親要素は直上の親要素でOK
         const keyword = "composite_curve_feature";
-        const compositeCurve = new SFCDrawer({
+        const compositeCurve = new SFCWriter({
             obj: this,
             fd: () => this.#fd,
             layers: this.#layers,
@@ -915,7 +915,7 @@ class SFCDrawer {
     }
 }
 
-const sfc = new SFCDrawer();
+const sfc = new SFCWriter();
 const group = sfc.sfigObj("part1");
 const basic = new BasicSetting("layer1", "red", "continuous", 0.13);
 const basic2 = new BasicSetting("layer1", "blue", "continuous", 0.13);
